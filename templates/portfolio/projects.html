@@ -1,0 +1,349 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Projects - Janon DUKUZUMUREMYI{% endblock %}
+
+{% block content %}
+<style>
+    :root {
+        --chocolate: #7B3F00;
+        --chocolate-light: #a56b2a;
+        --chocolate-dark: #4a2500;
+        --chocolate-lighter: #d7b28a;
+        --black: #212121;
+        --black-light: #424242;
+        --white: #FFFFFF;
+        --off-white: #f8f8f8;
+        --gray-light: #f5f5f5;
+        --gray: #e0e0e0;
+        --gray-medium: #bdbdbd;
+    }
+    
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: var(--black);
+        line-height: 1.6;
+        background: linear-gradient(to bottom, var(--off-white) 0%, var(--white) 100%);
+    }
+    
+    .section {
+        padding: 4rem 0;
+    }
+    
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+    }
+    
+    .section-title {
+        text-align: center;
+        color: var(--chocolate-dark);
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+        position: relative;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .section-title:after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(to right, var(--chocolate), var(--chocolate-light));
+        margin: 15px auto;
+        border-radius: 2px;
+    }
+    
+    .section-subtitle {
+        text-align: center;
+        font-size: 1.1rem;
+        margin-bottom: 3rem;
+        color: var(--black-light);
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    /* Projects Grid */
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 2.5rem;
+        margin-top: 2rem;
+    }
+    
+    .project-card {
+        background: linear-gradient(to bottom, var(--white) 0%, var(--off-white) 100%);
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        border-top: 1px solid var(--gray);
+        border-left: 1px solid var(--gray);
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+    
+    .project-card:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(to right, var(--chocolate), var(--chocolate-light));
+    }
+    
+    .project-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+    }
+    
+    .project-image {
+        padding: 2rem 2rem 1rem;
+        text-align: center;
+        background: linear-gradient(135deg, var(--off-white) 0%, var(--white) 100%);
+    }
+    
+    .project-image i {
+        font-size: 3.5rem;
+        color: var(--chocolate);
+        padding: 1.5rem;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--white) 0%, var(--off-white) 100%);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .project-content {
+        padding: 1.5rem 2rem 2rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .project-title {
+        font-size: 1.4rem;
+        color: var(--chocolate-dark);
+        font-weight: 700;
+        margin-bottom: 1rem;
+        line-height: 1.3;
+    }
+    
+    .project-description {
+        font-size: 1rem;
+        color: var(--black-light);
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+        flex-grow: 1;
+    }
+    
+    .project-tech {
+        margin-bottom: 1.5rem;
+    }
+    
+    .tech-tag {
+        background: linear-gradient(to right, var(--chocolate), var(--chocolate-light));
+        color: var(--white);
+        padding: 0.4rem 1rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        margin: 0 0.3rem 0.5rem 0;
+        display: inline-block;
+        box-shadow: 0 3px 8px rgba(123, 63, 0, 0.2);
+        transition: all 0.2s ease;
+    }
+    
+    .tech-tag:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 12px rgba(123, 63, 0, 0.3);
+    }
+    
+    .project-links {
+        margin-top: auto;
+    }
+    
+    .project-link {
+        display: inline-block;
+        padding: 0.7rem 1.5rem;
+        background: transparent;
+        color: var(--chocolate);
+        border: 2px solid var(--chocolate);
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+    }
+    
+    .project-link:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 100%;
+        background: linear-gradient(to right, var(--chocolate), var(--chocolate-light));
+        transition: all 0.3s ease;
+        z-index: -1;
+    }
+    
+    .project-link:hover {
+        color: var(--white);
+    }
+    
+    .project-link:hover:before {
+        width: 100%;
+    }
+    
+    /* Filter buttons */
+    .project-filters {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 2.5rem;
+    }
+    
+    .filter-btn {
+        padding: 0.6rem 1.5rem;
+        background: var(--off-white);
+        color: var(--black);
+        border: 2px solid var(--gray);
+        border-radius: 50px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .filter-btn:hover, .filter-btn.active {
+        background: linear-gradient(to right, var(--chocolate), var(--chocolate-light));
+        color: var(--white);
+        border-color: var(--chocolate);
+    }
+    
+    /* Empty state */
+    .projects-grid:has(p:only-child) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 300px;
+    }
+    
+    .projects-grid p {
+        text-align: center;
+        color: var(--black-light);
+        font-size: 1.1rem;
+        padding: 2rem;
+        background: var(--off-white);
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .projects-grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+        }
+        
+        .project-card {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+    }
+</style>
+
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">Projects</h2>
+        <p class="section-subtitle">A showcase of my work in data analysis, dashboard development, and statistical modeling</p>
+        
+        <!-- Project Filters -->
+        <div class="project-filters">
+            <button class="filter-btn active" data-filter="all">All Projects</button>
+            <button class="filter-btn" data-filter="data">Data Analysis</button>
+            <button class="filter-btn" data-filter="web">Web Development</button>
+            <button class="filter-btn" data-filter="ml">Machine Learning</button>
+        </div>
+        
+        <div class="projects-grid">
+            {% for project in projects %}
+            <div class="project-card" data-category="{{ project.category }}">
+                <div class="project-image">
+                    {% if project.icon %}
+                        <i class="fas {{ project.icon }}"></i>
+                    {% else %}
+                        <i class="fas fa-project-diagram"></i>
+                    {% endif %}
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">{{ project.title }}</h3>
+                    <div class="project-description">{{ project.description|safe }}</div>
+                    <div class="project-tech">
+                        {% for tech in project.technologies.all %}
+                        <span class="tech-tag">{{ tech.name }}</span>
+                        {% endfor %}
+                    </div>
+                    {% if project.link %}
+                    <div class="project-links">
+                        <a href="{{ project.link }}" class="project-link" target="_blank">View Project</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <p>No projects to display at this time. Please check back later for updates.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<script>
+    // Simple filtering functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                const filterValue = this.getAttribute('data-filter');
+                
+                // Show all projects if "all" is selected
+                if (filterValue === 'all') {
+                    projectCards.forEach(card => {
+                        card.style.display = 'flex';
+                    });
+                    return;
+                }
+                
+                // Filter projects based on category
+                projectCards.forEach(card => {
+                    const categories = card.getAttribute('data-category');
+                    if (categories.includes(filterValue)) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    });
+</script>
+{% endblock %}

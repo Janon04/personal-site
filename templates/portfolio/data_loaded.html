@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Data Loaded - Janon DUKUZUMUREMYI{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container text-center">
+        <h2 class="section-title">Data Loading Status</h2>
+        <div class="alert alert-success">
+            <h3>{{ message }}</h3>
+            <p>Your portfolio data has been successfully loaded into the database.</p>
+            <a href="{% url 'home' %}" class="btn">Return to Home</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

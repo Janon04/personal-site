@@ -1,0 +1,681 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home - Janon DUKUZUMUREMYI{% endblock %}
+
+{% block content %}
+<style>
+    :root {
+        --chocolate: #7B3F00;
+        --chocolate-light: #a56b2a;
+        --chocolate-dark: #4a2500;
+        --chocolate-lighter: #d7b28a;
+        --black: #212121;
+        --black-light: #424242;
+        --white: #FFFFFF;
+        --off-white: #f8f8f8;
+        --gray-light: #f5f5f5;
+        --gray: #e0e0e0;
+        --gray-medium: #bdbdbd;
+    }
+    
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: var(--black);
+        line-height: 1.6;
+        background: linear-gradient(to bottom, var(--off-white) 0%, var(--white) 100%);
+    }
+
+    /* Remove margin below navbar for first section */
+    .hero, .section:first-of-type {
+        margin-top: 0 !important;
+    }
+    
+    .section {
+        padding: 4rem 0;
+    }
+    
+    .bg-light {
+        background: linear-gradient(to bottom, var(--chocolate-lighter) 0%, rgba(255,255,255,0.8) 100%);
+        background-color: rgba(211, 178, 138, 0.15);
+        position: relative;
+    }
+    
+    .bg-light:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(to right, var(--chocolate-dark), var(--chocolate-light));
+    }
+    
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+    }
+    
+    .text-center {
+        text-align: center;
+    }
+    
+    .mt-3 {
+        margin-top: 1.5rem;
+    }
+    
+    .section-title {
+        text-align: center;
+        color: var(--chocolate-dark);
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+        position: relative;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .section-title:after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(to right, var(--chocolate), var(--chocolate-light));
+        margin: 15px auto;
+        border-radius: 2px;
+    }
+    
+    .section-subtitle {
+        text-align: center;
+        font-size: 1.1rem;
+        margin-bottom: 3rem;
+        color: var(--black-light);
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    /* Hero Section */
+    .hero {
+        background: linear-gradient(135deg, var(--chocolate-dark) 0%, var(--chocolate) 50%, var(--black) 100%);
+        color: var(--white);
+        padding: 6rem 0 5rem;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .hero:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+        opacity: 0.3;
+    }
+    
+    .hero-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        position: relative;
+        z-index: 1;
+        flex-wrap: wrap;
+    }
+    
+    .hero-text {
+        flex: 1;
+        min-width: 300px;
+        padding-right: 2rem;
+    }
+    
+    .hero-text h1 {
+        font-size: 3.2rem;
+        margin-bottom: 1.2rem;
+        font-weight: 700;
+        line-height: 1.2;
+    }
+    
+    .hero-text .subtitle {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        font-style: italic;
+        color: var(--chocolate-lighter);
+        position: relative;
+        display: inline-block;
+    }
+    
+    .hero-text .subtitle:after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background: var(--chocolate-lighter);
+    }
+    
+    .hero-text p {
+        margin-bottom: 2.2rem;
+        font-size: 1.1rem;
+        line-height: 1.7;
+        max-width: 90%;
+    }
+    
+    .hero-image {
+        flex: 1;
+        min-width: 300px;
+        text-align: center;
+    }
+    
+    .hero-image img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 12px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+        border: 5px solid var(--white);
+        transition: all 0.4s ease;
+    }
+    
+    .hero-image img:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Buttons */
+    .btn {
+        display: inline-block;
+        padding: 0.9rem 2.2rem;
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        margin-right: 1rem;
+        margin-bottom: 1rem;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+    
+    .btn-primary {
+        background: linear-gradient(to right, var(--chocolate), var(--chocolate-dark));
+        color: var(--white);
+        box-shadow: 0 5px 15px rgba(123, 63, 0, 0.3);
+    }
+    
+    .btn-primary:hover {
+        background: linear-gradient(to right, var(--chocolate-dark), var(--black));
+        color: var(--white);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(123, 63, 0, 0.4);
+    }
+    
+    .btn-secondary {
+        background: transparent;
+        color: var(--white);
+        border: 2px solid var(--white);
+    }
+    
+    .btn-secondary:hover {
+        background: var(--white);
+        color: var(--chocolate-dark);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+    }
+    
+    /* Skills Section */
+    .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2.5rem;
+    }
+    
+    .skill-category {
+        background: linear-gradient(to bottom, var(--white) 0%, var(--off-white) 100%);
+        padding: 2.2rem;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        border-top: 1px solid var(--gray);
+        border-left: 1px solid var(--gray);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .skill-category:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 100%;
+        background: linear-gradient(to bottom, var(--chocolate), var(--chocolate-light));
+    }
+    
+    .skill-category:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+    }
+    
+    .skill-item {
+        margin-bottom: 1.5rem;
+    }
+    
+    .skill-name {
+        display: flex;
+        justify-content: space-between;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: var(--chocolate-dark);
+    }
+    
+    .skill-bar {
+        background: var(--gray-light);
+        border-radius: 10px;
+        overflow: hidden;
+        height: 10px;
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+    
+    .skill-progress {
+        background: linear-gradient(to right, var(--chocolate), var(--chocolate-light));
+        height: 100%;
+        border-radius: 10px;
+        transition: width 1s ease-in-out;
+    }
+    
+    /* Projects Section */
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2.5rem;
+    }
+    
+    .project-card {
+        background: linear-gradient(to bottom, var(--white) 0%, var(--off-white) 100%);
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        border-top: 1px solid var(--gray);
+        border-left: 1px solid var(--gray);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .project-card:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(to right, var(--chocolate), var(--chocolate-light));
+    }
+    
+    .project-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+    }
+    
+    .project-image {
+        font-size: 3rem;
+        color: var(--chocolate);
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+    
+    .project-title {
+        font-size: 1.4rem;
+        color: var(--chocolate-dark);
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+    
+    .project-description {
+        font-size: 1rem;
+        margin: 1rem 0;
+        color: var(--black-light);
+        line-height: 1.6;
+    }
+    
+    .tech-tags {
+        margin: 1.2rem 0;
+    }
+    
+    .tech-tag {
+        background: linear-gradient(to right, var(--chocolate), var(--chocolate-light));
+        color: var(--white);
+        padding: 0.4rem 1rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        margin: 0 0.3rem 0.5rem 0;
+        display: inline-block;
+        box-shadow: 0 3px 8px rgba(123, 63, 0, 0.2);
+    }
+    
+    .project-link {
+        color: var(--chocolate);
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 1rem;
+        position: relative;
+    }
+    
+    .project-link:after {
+        content: '';
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--chocolate);
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.3s ease;
+    }
+    
+    .project-link:hover {
+        color: var(--chocolate-dark);
+    }
+    
+    .project-link:hover:after {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+    
+    /* CTA Section */
+    .cta-content {
+        background: linear-gradient(135deg, var(--chocolate) 0%, var(--chocolate-dark) 100%);
+        padding: 4rem 2rem;
+        border-radius: 15px;
+        text-align: center;
+        color: var(--white);
+        box-shadow: 0 15px 30px rgba(123, 63, 0, 0.25);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .cta-content:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+        opacity: 0.2;
+    }
+    
+    .cta-content .section-title {
+        color: var(--white);
+        position: relative;
+        z-index: 1;
+    }
+    
+    .cta-content .section-title:after {
+        background: linear-gradient(to right, var(--white), var(--chocolate-lighter));
+    }
+    
+    .cta-content .section-subtitle {
+        color: var(--chocolate-lighter);
+        position: relative;
+        z-index: 1;
+    }
+    
+    .cta-content .btn {
+        position: relative;
+        z-index: 1;
+    }
+    
+    /* Animated moving name */
+    .moving-name {
+        overflow: hidden;
+        white-space: nowrap;
+        position: relative;
+        width: 100%;
+        display: block;
+        height: 3.5rem;
+    }
+    .moving-name span {
+        display: inline-block;
+        min-width: max-content;
+        animation: moveName 8s linear infinite;
+        font-size: 3.2rem;
+        font-weight: 700;
+        color: var(--white);
+        letter-spacing: 2px;
+    }
+    @keyframes moveName {
+        0% {
+            transform: translateX(100%);
+        }
+        100% {
+            transform: translateX(-100%);
+        }
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+        .hero-container {
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .hero-text {
+            padding-right: 0;
+            margin-bottom: 3rem;
+        }
+        
+        .hero-text p {
+            max-width: 100%;
+        }
+        
+        .hero-text .subtitle:after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .hero-text h1 {
+            font-size: 2.5rem;
+        }
+        
+        .hero-text .subtitle {
+            font-size: 1.3rem;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+        }
+        
+        .skills-grid, .projects-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-container">
+        <div class="hero-text">
+            <h1 class="moving-name"><span>{{ personal_info.name }}</span></h1>
+            <p class="subtitle">Certified Data Analyst | MSc Financial Engineering (in progress)</p>
+            <p>A certified Data Analyst with expertise in data collection, statistical analysis, and data management. Skilled in developing data tools, automating dashboards, and transforming raw data into meaningful and actionable insights.</p>
+            <a href="{% url 'about' %}" class="btn btn-primary">Learn More</a>
+            <a href="{% url 'contact' %}" class="btn btn-secondary">Get In Touch</a>
+        </div>
+        <div class="hero-image">
+            <img src="{% static 'images/My profile picture.jpg' %}" alt="{{ personal_info.name }}">
+        </div>
+    </div>
+</section>
+
+<!-- Skills -->
+<section class="section bg-light">
+    <div class="container">
+        <h2 class="section-title">Core Skills</h2>
+        <p class="section-subtitle">Expertise in data analysis, statistical modeling, and data visualization</p>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3>Data Analysis</h3>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Python</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Power BI</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>STATA/SPSS</span>
+                        <span>88%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 88%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <h3>Web Development</h3>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>HTML/CSS</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>JavaScript</span>
+                        <span>80%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 80%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Django</span>
+                        <span>75%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 75%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <h3>Soft Skills</h3>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Communication</span>
+                        <span>92%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 92%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Problem Solving</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Team Collaboration</span>
+                        <span>88%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 88%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Projects -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">Featured Projects</h2>
+        <p class="section-subtitle">Showcasing my expertise in data analysis and dashboard development</p>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-image">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3 class="project-title">Sales Analytics Dashboard</h3>
+                <p class="project-description">Developed an interactive Power BI dashboard to track sales performance, customer behavior, and regional trends for a retail company.</p>
+                <div class="tech-tags">
+                    <span class="tech-tag">Power BI</span>
+                    <span class="tech-tag">SQL</span>
+                    <span class="tech-tag">DAX</span>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-image">
+                    <i class="fas fa-database"></i>
+                </div>
+                <h3 class="project-title">Inventory Management System</h3>
+                <p class="project-description">Created a comprehensive inventory management system with automated reporting and predictive analytics for stock optimization.</p>
+                <div class="tech-tags">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Django</span>
+                    <span class="tech-tag">PostgreSQL</span>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-image">
+                    <i class="fas fa-chart-pie"></i>
+                </div>
+                <h3 class="project-title">Financial Data Analysis</h3>
+                <p class="project-description">Performed statistical analysis on financial datasets to identify trends, correlations, and predictive indicators for investment strategies.</p>
+                <div class="tech-tags">
+                    <span class="tech-tag">R</span>
+                    <span class="tech-tag">STATA</span>
+                    <span class="tech-tag">Excel</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="section">
+    <div class="container">
+        <div class="cta-content">
+            <h2 class="section-title">Ready to Work Together?</h2>
+            <p class="section-subtitle">Let's discuss how I can help with your data analysis or dashboard development needs.</p>
+            <a href="{% url 'contact' %}" class="btn btn-secondary">Get In Touch</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
