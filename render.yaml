@@ -1,9 +1,14 @@
+
 # Render Blueprint for Django Deployment
 services:
+#
   - type: web
     name: personal-site
     env: python
-    buildCommand: pip install -r requirements.txt
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py migrate
+      python manage.py collectstatic --noinput
     startCommand: gunicorn portfolio_site.wsgi
     envVars:
       - key: DJANGO_SECRET_KEY
@@ -11,4 +16,8 @@ services:
       - key: DEBUG
         value: "False"
       - key: ALLOWED_HOSTS
-        value: "<your-render-domain>"
+        value: "personal-site.onrender.com"
+    workingDir: janon_portfolio
+#
+# If you use static/media files, ensure you have WhiteNoise configured in Django
+# or set up a separate static site on Render for static/media hosting.
