@@ -18,6 +18,4 @@ services:
       - key: ALLOWED_HOSTS
         value: "personal-site.onrender.com"
     workingDir: janon_portfolio
-#
-# If you use static/media files, ensure you have WhiteNoise configured in Django
-# or set up a separate static site on Render for static/media hosting.
+

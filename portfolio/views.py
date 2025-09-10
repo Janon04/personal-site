@@ -67,7 +67,7 @@ def contact(request):
         email = request.POST.get('email')
         subject = request.POST.get('subject')
         message = request.POST.get('message')
-        
+
         # Save to database
         contact_message = Contact.objects.create(
             name=name,
@@ -75,7 +75,17 @@ def contact(request):
             subject=subject,
             message=message
         )
-        
+
+        # Send email notification
+        from django.core.mail import send_mail
+        send_mail(
+            subject=f'New Contact Message: {subject}',
+            message=f'Name: {name}\nEmail: {email}\nMessage: {message}',
+            from_email='janon3030@gmail.com',
+            recipient_list=['janon3030@gmail.com'],
+            fail_silently=False,
+        )
+
         messages.success(request, 'Thank you for your message! I will get back to you soon.')
         return redirect('contact')
     

@@ -1,3 +1,11 @@
+# Email backend configuration for Gmail
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'janon3030@gmail.com'
+EMAIL_HOST_PASSWORD = 'bflu atpq mrhe wzvw' 
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 """
 Django settings for portfolio_site project.
 
