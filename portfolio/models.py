@@ -88,11 +88,16 @@ class Project(models.Model):
         return self.title
 
 class Certificate(models.Model):
+
     name = models.CharField(max_length=100)
     issuer = models.CharField(max_length=100)
     date_issued = models.DateField(blank=True, null=True)
     credential_url = models.URLField(blank=True)
     pdf = models.FileField(upload_to='certificates/', blank=True, null=True, help_text='Upload certificate as PDF')
+    order = models.IntegerField(default=0, help_text='Order for manual arrangement')
+
+    class Meta:
+        ordering = ['order']
 
     def __str__(self):
         return self.name
